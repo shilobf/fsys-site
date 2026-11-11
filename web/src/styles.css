@@ -1,0 +1,100 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Heebo', system-ui, sans-serif;
+  --font-latin: 'Montserrat', 'Heebo', sans-serif;
+
+  --color-ink: #05070c;
+  --color-panel: #0a101b;
+  --color-panel-2: #0f1726;
+  --color-line: #1c2738;
+  --color-muted: #8a97ab;
+  --color-brand: #9be15d;
+  --color-brand-strong: #7fcb3c;
+  --color-signal: #3b82f6;
+
+  --animate-kenburns: kenburns 24s ease-in-out infinite alternate;
+}
+
+@keyframes kenburns {
+  from { transform: scale(1.04) translate3d(0, 0, 0); }
+  to { transform: scale(1.14) translate3d(-1.5%, -1%, 0); }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  @apply bg-ink text-white font-sans antialiased;
+}
+
+::selection {
+  background: var(--color-brand);
+  color: var(--color-ink);
+}
+
+/* Scroll reveal – the class is only added in the browser, so SSR output stays visible without JS. */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .animate-kenburns { animation: none; }
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 px-7 py-3 text-base font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:opacity-60;
+}
+@utility btn-primary {
+  @apply btn bg-brand text-ink hover:bg-white;
+}
+@utility btn-ghost {
+  @apply btn border border-brand text-white hover:bg-brand hover:text-ink;
+}
+
+@utility eyebrow {
+  @apply font-latin text-xs font-semibold tracking-[0.35em] text-brand uppercase;
+}
+
+/* ---- Admin UI ---- */
+@utility adm-input {
+  @apply block w-full border border-line bg-ink px-3 py-2.5 text-base text-white transition-colors outline-none focus:border-brand;
+}
+@utility adm-btn {
+  @apply inline-flex items-center gap-2 border border-line px-4 py-2 text-sm text-white/85 transition-colors hover:border-brand hover:text-brand disabled:pointer-events-none disabled:opacity-40;
+}
+@utility adm-icon {
+  @apply grid size-9 place-items-center border border-line text-sm text-white/70 transition-colors hover:border-brand hover:text-brand disabled:pointer-events-none disabled:opacity-30;
+}
+@utility adm-link {
+  @apply text-sm text-brand hover:underline;
+}
+@utility adm-h2 {
+  @apply text-2xl font-bold;
+}
+@utility adm-card {
+  @apply space-y-4 border border-line bg-panel p-5;
+}
+@utility adm-tab {
+  @apply px-3 py-1.5 text-sm text-white/70 transition-colors hover:text-white;
+  &.is-active { @apply bg-brand/15 text-brand; }
+}
+@utility adm-side {
+  @apply shrink-0 px-3 py-2 text-start text-sm whitespace-nowrap text-white/70 transition-colors hover:bg-white/5 hover:text-white;
+  &.is-active { @apply bg-brand/15 text-brand; }
+}
+
+@utility section-title {
+  @apply text-4xl font-bold leading-tight md:text-5xl;
+}
