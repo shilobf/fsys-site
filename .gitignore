@@ -4,3 +4,4 @@ dist/
 .env
 api/data/
 *.log
+*.tsbuildinfo
