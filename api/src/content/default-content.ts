@@ -6,6 +6,8 @@ export interface Capability {
   subtitle: string;
   steps: string;
   image: string;
+  /** Optional interactive 3D simulation (an HTML page) shown with this capability. */
+  simulation?: string;
 }
 
 export interface Product {
@@ -23,6 +25,8 @@ export interface SiteContent {
     tagline: string;
     lines: string[];
     image: string;
+    /** Background videos played in sequence; `image` is the poster/fallback. */
+    videos: string[];
     ctaPrimary: string;
     ctaSecondary: string;
   };
@@ -49,13 +53,14 @@ export const DEFAULT_CONTENT: SiteContent = {
   },
   hero: {
     eyebrow: 'ONE STOP SHOP',
-    title: 'מקונספט לפתרון שעובד בשטח',
+    title: 'מרעיון לפתרון שעובד בשטח',
     tagline: 'ENGINEERING • INTEGRATION • PRODUCTION',
     lines: [
       'פיתוח, תכנון וייצור של תשתיות חשמל, אנרגיה ובקרה',
       'פתרונות אינטגרטיביים לעולם הבטחוני ולכלי רכב משימתיים',
     ],
     image: '/images/hero.jpg',
+    videos: ['/videos/hero-1.mp4', '/videos/hero-2.mp4', '/videos/hero-3.mp4'],
     ctaPrimary: 'תחומי הפעילות',
     ctaSecondary: 'צרו קשר',
   },
@@ -99,6 +104,7 @@ export const DEFAULT_CONTENT: SiteContent = {
         subtitle: 'גנרטורים ייחודיים ומערכות מצברים',
         steps: 'פיתוח • ייצור • בדיקות',
         image: '/images/energy.jpg',
+        simulation: '/sims/generator-3d.html',
       },
       {
         title: 'זיווד אלקטרוני ומארזים',

@@ -5,6 +5,8 @@ export interface Capability {
   subtitle: string;
   steps: string;
   image: string;
+  /** Optional interactive 3D simulation (an HTML page) shown with this capability. */
+  simulation?: string;
 }
 
 export interface Product {
@@ -22,6 +24,8 @@ export interface SiteContent {
     tagline: string;
     lines: string[];
     image: string;
+    /** Background videos played in sequence; `image` is the poster/fallback. */
+    videos: string[];
     ctaPrimary: string;
     ctaSecondary: string;
   };

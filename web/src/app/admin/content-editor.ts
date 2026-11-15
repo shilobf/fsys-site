@@ -44,7 +44,9 @@ type SectionKey = 'company' | 'hero' | 'stats' | 'about' | 'capabilities' | 'pro
                   <adm-text label="כפתור ראשי" [(value)]="d.hero.ctaPrimary" />
                   <adm-text label="כפתור משני" [(value)]="d.hero.ctaSecondary" />
                 </div>
-                <adm-image label="תמונת רקע" [(value)]="d.hero.image" />
+                <adm-image label="תמונת רקע (מוצגת עד שהסרטון נטען)" [(value)]="d.hero.image" />
+                <adm-string-list label="סרטוני רקע (מתנגנים ברצף)" [(items)]="d.hero.videos" />
+                <p class="-mt-4 text-xs text-muted">נתיב לקובץ MP4, לדוגמה /videos/hero-1.mp4</p>
               }
               @case ('stats') {
                 <h2 class="adm-h2">נתונים בולטים</h2>
@@ -78,6 +80,7 @@ type SectionKey = 'company' | 'hero' | 'stats' | 'about' | 'capabilities' | 'pro
                     <adm-text label="תת-כותרת" [(value)]="c.subtitle" />
                     <adm-text label="שלבים" [(value)]="c.steps" hint="לדוגמה: תכן • רכש • ייצור • בדיקות" />
                     <adm-image label="תמונה" [(value)]="c.image" />
+                    <adm-text label="הדמיה תלת-ממדית (לא חובה)" [value]="c.simulation ?? ''" (valueChange)="c.simulation = $event || undefined" ltr hint="נתיב לדף HTML באתר, לדוגמה /sims/generator-3d.html" />
                   </div>
                 }
                 <button type="button" class="adm-btn" (click)="add('capabilities')">+ הוספת תחום</button>
@@ -230,6 +233,7 @@ export class ContentEditor {
   }
 
   private reset(c: SiteContent) {
+    c.hero.videos ??= []; // documents saved before videos existed
     this.saved = JSON.stringify(c);
     this.draft.set(JSON.parse(this.saved));
     this.status.set('idle');
