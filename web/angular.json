@@ -30,7 +30,7 @@
             "server": "src/main.server.ts",
             "outputMode": "server",
             "security": {
-              "allowedHosts": ["localhost", "fsysint.com", "www.fsysint.com", "*.onrender.com"]
+              "allowedHosts": ["localhost", "fsysint.com", "www.fsysint.com", "fsyseng.com", "www.fsyseng.com", "*.onrender.com"]
             },
             "ssr": {
               "entry": "src/server.ts"
