@@ -94,7 +94,7 @@ type SectionKey = 'company' | 'hero' | 'stats' | 'about' | 'capabilities' | 'pro
                 <h2 class="adm-h2">קווי מוצרים</h2>
                 <adm-text label="כותרת" [(value)]="d.products.title" />
                 <adm-text label="תיאור" [(value)]="d.products.intro" multiline [rows]="2" />
-                <adm-image label="תמונת רקע" [(value)]="d.products.background" />
+                <adm-image label="תמונת רקע (ברקע פס הנתונים)" [(value)]="d.products.background" />
                 @for (p of d.products.items; track $index; let i = $index) {
                   <div class="adm-card">
                     <ng-container *ngTemplateOutlet="itemTools; context: { list: 'products', i, n: d.products.items.length }" />

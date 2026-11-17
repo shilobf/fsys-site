@@ -35,9 +35,7 @@ export class ContactController {
       phone: clean(body?.phone, 50) || undefined,
       createdAt: new Date().toISOString(),
     };
-    const all = (await this.store.read<ContactMessage[]>('messages')) ?? [];
-    all.push(msg);
-    await this.store.write('messages', all);
+    await this.store.append('messages', msg);
     return { ok: true };
   }
 

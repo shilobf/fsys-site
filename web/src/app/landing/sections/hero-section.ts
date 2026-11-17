@@ -30,19 +30,20 @@ import { SiteContent } from '../../core/content.model';
         }
       }
 
-      <div class="absolute inset-0 -z-10 bg-ink/55"></div>
-      <div class="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-ink to-transparent"></div>
+      <div class="absolute inset-0 -z-10 bg-fs-deep/50"></div>
 
-      <div class="mx-auto flex w-full max-w-7xl flex-1 items-center justify-center px-4 pt-28 pb-16 md:px-8">
+      <div class="mx-auto flex w-full max-w-7xl flex-1 items-center justify-center px-4 pt-32 pb-24 text-white md:px-8">
         <div class="max-w-4xl text-center">
-          <p class="eyebrow mb-6">{{ hero().eyebrow }}</p>
-          <h1 class="text-5xl leading-[1.05] font-extrabold [text-wrap:balance] drop-shadow-lg md:text-7xl">
+          @if (hero().eyebrow) {
+            <p class="font-latin mb-5 text-xs font-bold tracking-[0.35em] text-brand md:text-sm">{{ hero().eyebrow }}</p>
+          }
+          <h1 dir="auto" class="text-5xl leading-[1.1] font-extrabold [text-wrap:balance] drop-shadow-[0_2px_12px_rgba(0,0,0,.45)] md:text-7xl">
             {{ hero().title }}
           </h1>
-          <p class="font-latin mt-6 text-sm font-semibold tracking-[0.25em] text-white/75 md:text-base" dir="ltr">
+          <p class="font-latin mt-6 text-sm font-bold tracking-[0.25em] text-brand drop-shadow-[0_1px_6px_rgba(0,0,0,.9)] md:text-base" dir="ltr">
             {{ hero().tagline }}
           </p>
-          <div class="mx-auto mt-8 max-w-2xl space-y-2 text-lg text-white/90 md:text-xl">
+          <div class="mx-auto mt-6 max-w-2xl space-y-1 text-lg text-white/90 md:text-xl">
             @for (line of hero().lines; track $index) {
               <p>{{ line }}</p>
             }
@@ -54,25 +55,14 @@ import { SiteContent } from '../../core/content.model';
         </div>
       </div>
 
-      <div class="border-t border-white/10 bg-ink/60 backdrop-blur-sm">
-        <dl class="mx-auto grid max-w-7xl grid-cols-2 md:grid-cols-4">
-          @for (s of stats(); track $index) {
-            <div class="border-white/10 px-4 py-6 md:px-8 [&:not(:last-child)]:border-e">
-              <dt class="sr-only">{{ s.label }}</dt>
-              <dd>
-                <span class="font-latin block text-2xl font-bold text-brand md:text-3xl">{{ s.value }}</span>
-                <span class="mt-1 block text-sm text-muted">{{ s.label }}</span>
-              </dd>
-            </div>
-          }
-        </dl>
-      </div>
+      <a href="#about" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/70 hover:text-white" aria-label="גלילה לתוכן">
+        <span class="block animate-bounce text-3xl leading-none" aria-hidden="true">⌄</span>
+      </a>
     </section>
   `,
 })
 export class HeroSection {
   readonly hero = input.required<SiteContent['hero']>();
-  readonly stats = input.required<SiteContent['stats']>();
 
   protected readonly videos = computed(() => (this.hero().videos ?? []).filter(Boolean));
   protected readonly slots = computed(() => (this.videos().length > 1 ? [0, 1] : [0]));

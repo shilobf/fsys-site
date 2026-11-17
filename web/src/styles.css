@@ -4,14 +4,24 @@
   --font-sans: 'Heebo', system-ui, sans-serif;
   --font-latin: 'Montserrat', 'Heebo', sans-serif;
 
-  --color-ink: #05070c;
-  --color-panel: #0a101b;
-  --color-panel-2: #0f1726;
-  --color-line: #1c2738;
-  --color-muted: #8a97ab;
-  --color-brand: #9be15d;
-  --color-brand-strong: #7fcb3c;
-  --color-signal: #3b82f6;
+  /* Logo palette: gear blue, lightning green, wordmark gray. */
+  --color-fs-blue: #2a3c73;
+  --color-fs-navy: #17224a;
+  --color-fs-deep: #0f1733;
+  --color-fs-green: #1db078;
+  --color-fs-gray: #444445;
+  --color-surface: #f3f5f9;
+  --color-rule: #dde2ec;
+
+  /* Dark tokens (admin UI) derived from the same palette. */
+  --color-ink: #0b1228;
+  --color-panel: #111a36;
+  --color-panel-2: #172242;
+  --color-line: #26335a;
+  --color-muted: #8f9bb8;
+  --color-brand: #1db078;
+  --color-brand-strong: #179766;
+  --color-signal: #2a3c73;
 
   --animate-kenburns: kenburns 24s ease-in-out infinite alternate;
 }
@@ -32,7 +42,7 @@ body {
 
 ::selection {
   background: var(--color-brand);
-  color: var(--color-ink);
+  color: white;
 }
 
 /* Scroll reveal – the class is only added in the browser, so SSR output stays visible without JS. */
@@ -57,10 +67,18 @@ body {
   @apply inline-flex items-center justify-center gap-2 px-7 py-3 text-base font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:opacity-60;
 }
 @utility btn-primary {
-  @apply btn bg-brand text-ink hover:bg-white;
+  @apply btn bg-brand font-bold text-white hover:bg-brand-strong;
 }
 @utility btn-ghost {
-  @apply btn border border-brand text-white hover:bg-brand hover:text-ink;
+  @apply btn border border-white/70 text-white hover:border-brand hover:bg-brand;
+}
+
+/* Solid label block used as a section heading (reference style). */
+@utility chip {
+  @apply inline-block bg-fs-blue px-4 py-1.5 text-xl leading-snug font-bold text-white md:text-2xl;
+}
+@utility link-more {
+  @apply inline-flex items-center gap-1 font-bold text-brand transition-colors hover:text-fs-blue;
 }
 
 @utility eyebrow {

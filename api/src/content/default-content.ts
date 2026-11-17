@@ -52,8 +52,8 @@ export const DEFAULT_CONTENT: SiteContent = {
     logo: '/images/logo.png',
   },
   hero: {
-    eyebrow: 'ONE STOP SHOP',
-    title: 'מרעיון לפתרון שעובד בשטח',
+    eyebrow: '',
+    title: 'One Stop Shop In-House',
     tagline: 'ENGINEERING • INTEGRATION • PRODUCTION',
     lines: [
       'פיתוח, תכנון וייצור של תשתיות חשמל, אנרגיה ובקרה',

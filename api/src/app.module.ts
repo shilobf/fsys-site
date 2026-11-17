@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { JsonStore } from './storage/json-store.js';
+import { BlobStore } from './storage/blob-store.js';
+import { Mongo } from './storage/mongo.js';
 import { ContentService } from './content/content.service.js';
 import { ContentController } from './content/content.controller.js';
 import { AuthController } from './auth/auth.controller.js';
@@ -22,6 +24,6 @@ import { UploadsController } from './uploads/uploads.controller.js';
     }),
   ],
   controllers: [ContentController, AuthController, ContactController, UploadsController],
-  providers: [JsonStore, ContentService, AdminGuard],
+  providers: [Mongo, JsonStore, BlobStore, ContentService, AdminGuard],
 })
 export class AppModule {}

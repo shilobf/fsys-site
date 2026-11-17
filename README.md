@@ -37,7 +37,16 @@ cd web && npm start             # http://localhost:4200
 | POST | /api/uploads (multipart `file`, עד 10MB, JPG/PNG/WEBP/GIF) | מנהל |
 | GET | /api/uploads/:name | ציבורי |
 
+## אחסון נתונים
+- כש-`MONGODB_URI` מוגדר: התוכן והפניות נשמרים באוסף `docs`, והתמונות שהמנהל מעלה נשמרות ב-GridFS (`uploads`).
+- בלי `MONGODB_URI` (פיתוח מקומי): הכול נשמר בקבצים תחת `DATA_DIR` (`api/data`).
+
+## פריסה (Render, חינמי)
+- `render.yaml` מגדיר שירות אחד: `npm run build` בונה את ה-API ואת האתר, ו-`npm start` (`start.mjs`) מריץ את שניהם.
+- משתני סביבה ב-Render: `MONGODB_URI` (מ-MongoDB Atlas), `ADMIN_PASSWORD`. את `JWT_SECRET` ‏Render מייצר לבד.
+- בחינם השירות נרדם אחרי 15 דקות בלי ביקורים. שירות פינג חיצוני (כמו cron-job.org כל 10 דקות ל-`/api/content`) שומר אותו ער.
+- דומיינים מורשים ל-SSR: `web/angular.json` ‏→ `security.allowedHosts`.
+
 ## להמשך
-- מעבר ל-MongoDB: להחליף את `JsonStore` במימוש Mongo
 - שליחת מייל על פנייה חדשה
 - דחיסת תמונות (חלקן 1–3MB)

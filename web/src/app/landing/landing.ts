@@ -10,6 +10,8 @@ import { ProcessSection } from './sections/process-section';
 import { ProductsSection } from './sections/products-section';
 import { ContactSection } from './sections/contact-section';
 import { SiteFooter } from './sections/site-footer';
+import { StatsSection } from './sections/stats-section';
+import { ConsultBar } from './sections/consult-bar';
 
 @Component({
   selector: 'app-landing',
@@ -22,19 +24,25 @@ import { SiteFooter } from './sections/site-footer';
     ProductsSection,
     ContactSection,
     SiteFooter,
+    StatsSection,
+    ConsultBar,
   ],
   template: `
     @if (content(); as c) {
+      <div class="bg-white text-fs-gray">
         <app-site-header [company]="c.company" />
         <main>
-          <app-hero-section [hero]="c.hero" [stats]="c.stats" />
+          <app-hero-section [hero]="c.hero" />
           <app-about-section [about]="c.about" />
           <app-capabilities-section [capabilities]="c.capabilities" />
-          <app-process-section [process]="c.process" />
           <app-products-section [products]="c.products" />
+          <app-stats-section [stats]="c.stats" [background]="c.products.background" />
+          <app-process-section [process]="c.process" />
           <app-contact-section [contact]="c.contact" />
         </main>
-        <app-site-footer [company]="c.company" [contact]="c.contact" />
+        <app-site-footer [company]="c.company" [contact]="c.contact" [capabilities]="c.capabilities" [products]="c.products" />
+        <app-consult-bar />
+      </div>
     } @else if (failed()) {
       <div class="grid min-h-screen place-items-center p-8 text-center">
         <div>

@@ -18,33 +18,32 @@ interface ContactField {
   selector: 'app-contact-section',
   imports: [ReactiveFormsModule, RevealDirective],
   template: `
-    <section id="contact" class="border-t border-line bg-panel py-24 md:py-32">
+    <section id="contact" class="bg-surface py-20 md:py-28">
       <div class="mx-auto grid max-w-7xl gap-14 px-4 md:px-8 lg:grid-cols-[2fr_3fr]">
         <div appReveal>
-          <p class="eyebrow mb-4">CONTACT</p>
-          <h2 class="section-title">{{ contact().title }}</h2>
-          <p class="mt-4 text-lg text-white/70">{{ contact().intro }}</p>
+          <h2 class="chip">{{ contact().title }}</h2>
+          <p class="mt-6 text-lg text-fs-gray">{{ contact().intro }}</p>
 
-          <dl class="mt-10 space-y-6">
+          <dl class="mt-10 space-y-6 border-s-[3px] border-fs-green ps-6">
             <div>
-              <dt class="text-sm text-muted">אימייל</dt>
-              <dd><a [href]="'mailto:' + contact().email" class="text-xl hover:text-brand" dir="ltr">{{ contact().email }}</a></dd>
+              <dt class="text-sm font-bold text-fs-blue">אימייל</dt>
+              <dd><a [href]="'mailto:' + contact().email" class="text-xl text-fs-gray hover:text-brand" dir="ltr">{{ contact().email }}</a></dd>
             </div>
             <div>
-              <dt class="text-sm text-muted">טלפון</dt>
-              <dd><a [href]="'tel:' + contact().phone" class="text-xl hover:text-brand" dir="ltr">{{ contact().phone }}</a></dd>
+              <dt class="text-sm font-bold text-fs-blue">טלפון</dt>
+              <dd><a [href]="'tel:' + contact().phone" class="text-xl text-fs-gray hover:text-brand" dir="ltr">{{ contact().phone }}</a></dd>
             </div>
             <div>
-              <dt class="text-sm text-muted">כתובת</dt>
-              <dd class="text-xl">{{ contact().address }}</dd>
+              <dt class="text-sm font-bold text-fs-blue">כתובת</dt>
+              <dd class="text-xl text-fs-gray">{{ contact().address }}</dd>
             </div>
           </dl>
         </div>
 
-        <form appReveal [appRevealDelay]="120" [formGroup]="form" (ngSubmit)="submit()" class="grid gap-5 sm:grid-cols-2" novalidate>
+        <form appReveal [appRevealDelay]="120" [formGroup]="form" (ngSubmit)="submit()" class="grid gap-5 bg-white p-6 shadow-sm sm:grid-cols-2 md:p-8" novalidate>
           @for (f of fields; track f.name) {
             <label class="flex flex-col gap-2" [class.sm:col-span-2]="f.wide">
-              <span class="text-sm text-white/80">{{ f.label }}@if (f.required) {<span class="text-brand"> *</span>}</span>
+              <span class="text-sm font-bold text-fs-gray">{{ f.label }}@if (f.required) {<span class="text-brand"> *</span>}</span>
               @if (f.name === 'message') {
                 <textarea [formControlName]="f.name" rows="5" class="field resize-y"></textarea>
               } @else {
@@ -60,8 +59,8 @@ interface ContactField {
             <p aria-live="polite" class="text-sm">
               @switch (status()) {
                 @case ('sent') { <span class="text-brand">תודה! ההודעה התקבלה ונחזור אליכם בהקדם.</span> }
-                @case ('invalid') { <span class="text-amber-300">נא למלא שם, אימייל תקין והודעה.</span> }
-                @case ('error') { <span class="text-red-400">השליחה נכשלה. נסו שוב או פנו אלינו במייל.</span> }
+                @case ('invalid') { <span class="text-amber-600">נא למלא שם, אימייל תקין והודעה.</span> }
+                @case ('error') { <span class="text-red-600">השליחה נכשלה. נסו שוב או פנו אלינו במייל.</span> }
               }
             </p>
           </div>
@@ -71,19 +70,20 @@ interface ContactField {
   `,
   styles: `
     .field {
-      background: var(--color-ink);
-      border: 1px solid var(--color-line);
-      padding: 0.75rem 1rem;
+      background: white;
+      border: 0;
+      border-bottom: 2px solid var(--color-rule);
+      padding: 0.6rem 0.25rem;
       font-size: 1rem;
-      color: white;
+      color: var(--color-fs-gray);
       transition: border-color 0.2s;
     }
     .field:focus {
       outline: none;
-      border-color: var(--color-brand);
+      border-bottom-color: var(--color-brand);
     }
     .field.ng-invalid.ng-touched {
-      border-color: #f87171;
+      border-bottom-color: #dc2626;
     }
   `,
 })
