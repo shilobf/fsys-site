@@ -1,6 +1,9 @@
 import { Component, ElementRef, afterNextRender, computed, input, signal, viewChildren } from '@angular/core';
 import { SiteContent } from '../../core/content.model';
 
+/** How long the poster image stays on screen before the first video starts. */
+const HOLD_IMAGE_MS = 4000;
+
 /**
  * Full-screen hero. Background videos play one after another in a loop, cross-fading between
  * two stacked <video> elements (the idle one preloads the next clip). The image is the poster and
@@ -82,7 +85,8 @@ export class HeroSection {
   constructor() {
     afterNextRender(() => {
       this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!this.reducedMotion) this.play(0);
+      // Show the poster image on its own for a moment before the first clip starts.
+      if (!this.reducedMotion) setTimeout(() => this.play(0), HOLD_IMAGE_MS);
     });
   }
 
